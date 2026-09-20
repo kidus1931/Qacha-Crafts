@@ -227,17 +227,24 @@
       we make the best crafts using qacha and we also make different artistic images and different artistic home decors to transform your house
     </p>
 
-    <button class='explore'>
+    <button class='explore' id="Explore">
       Explore crafts
     </button>
 
   </div>
 
   <nav>
-    <button>contact</button>
+    <button id="contact">contact</button>
     <button>about us</button>
     <button><a href="Qacha_Crafts Portfolio.pdf">Portfolio</a></button>
   </nav>
-
+<script>
+  document.getElementById("contact").addEventListener("click", function(){
+    window.location.href = "Contact.html";
+  })
+  document.getElementById("Explore").addEventListener("click", function(){
+    window.location.href = "Products.html";
+  })
+</script>
 </body>
 </html>
