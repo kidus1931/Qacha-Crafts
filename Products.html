@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Qacha Craft: a curated collection of distinctive artworks and handcrafted pieces.">
+<meta name="theme-color" content="#2C1A11">
+<title>Qacha Craft — Art Collection</title>
+
+<!--
+  INTRO GATE + FAILSAFE (runs before first paint).
+  The intro only plays when this script switches it on. That means:
+   - no JavaScript            -> no intro, the shop is visible immediately
+   - reduced-motion setting   -> no intro
+   - already seen this session -> no intro (also skips it when using the Back button)
+   - anything goes wrong later -> after 7 seconds the intro is force-removed, so the page can never get stuck
+-->
+<script>
+(function(){
+  var d = document.documentElement;
+  var skip = false;
+  try{
+    skip = window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+           sessionStorage.getItem("qc_intro") === "1";
+  }catch(e){}
+  if(skip) return;
+  d.classList.add("intro-on");
+  window.__qcFailsafe = setTimeout(function(){
+    d.classList.remove("intro-on", "intro-play", "intro-exit");
+  }, 7000);
+})();
+</script>
+
+<!-- Fonts: only the weights the page uses. The stylesheet loads without blocking the first paint. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="gfonts" rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Caveat:wght@700&family=Inter:wght@400;600;700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Caveat:wght@700&family=Inter:wght@400;600;700&display=swap"></noscript>
+
+<!-- Favicon (built-in, no extra file needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232C1A11'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23D8B48A'%3EQ%3C/text%3E%3C/svg%3E">
+
+<!-- Link previews (Telegram, WhatsApp, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Qacha Craft">
+<meta property="og:title" content="Qacha Craft — Art Collection">
+<meta property="og:description" content="A curated collection of distinctive artworks and handcrafted pieces.">
+<!--
+  ADD THESE ONCE YOU HAVE A DOMAIN AND A SHARE IMAGE (1200x630, full https:// addresses only):
+  <meta property="og:url" content="https://YOUR-DOMAIN/shop.html">
+  <meta property="og:image" content="https://YOUR-DOMAIN/share.jpg">
+  <link rel="canonical" href="https://YOUR-DOMAIN/shop.html">
+-->
+
+<style>
+:root{
+  --brown-dark:#2C1A11;
+  --brown-mid:#7A4E31;
+  --brown-warm:#9E673E;
+  --brown-text:#8A5732; /* darker than brown-warm for AA contrast on white */
+  --tan:#D8B48A;
+  --gold:#C7A467;
+  --cream:#F6EFE4;
+  --paper:#FBF7EF;
+  --black:#17110B;
+  --white:#FFFFFF;
+  --radius-card:8px;
+  --ease-smooth:cubic-bezier(0.16,1,0.3,1);
+  --ease-curtain:cubic-bezier(0.83,0,0.17,1);
+  --curtain-ms:1000ms;
+  --gutter:max(clamp(20px,5vw,60px),calc((100% - 1400px) / 2));
+  --font-display:'Fraunces',Georgia,'Noto Sans Ethiopic',serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI','Noto Sans Ethiopic',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --font-script:'Caveat','Segoe Script','Brush Script MT',cursive;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-gutter:stable;background:var(--paper);}
+html.intro-on{background:var(--brown-dark);overflow:hidden;}
+html,body{margin:0;padding:0;}
+body{background:var(--paper);color:var(--black);font-family:var(--font-body);-webkit-font-smoothing:antialiased;}
+h1,h2,h3{margin:0;font-family:var(--font-display);}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--brown-warm);outline-offset:3px;}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ---------- Intro (hidden unless the head script switches it on) ---------- */
+#intro{
+  display:none;
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at 50% -10%,#4D301C 0%,var(--brown-dark) 65%),var(--brown-dark);
+  align-items:center;justify-content:center;z-index:1000;
+  transition:transform var(--curtain-ms) var(--ease-curtain);
+  transform:translate3d(0,0,0);will-change:transform;backface-visibility:hidden;
+}
+.intro-on #intro{display:flex;}
+.intro-on.intro-exit #intro{transform:translate3d(0,-100%,0);}
+.intro-inner{display:flex;flex-direction:column;align-items:center;gap:clamp(20px,4vw,32px);padding:24px;text-align:center;}
+.brand{font-family:var(--font-display);font-size:clamp(2.8rem,8vw,5.2rem);font-weight:700;letter-spacing:-.03em;line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:.25em;}
+.word.brown{color:var(--brown-warm);}
+.word.white{color:var(--white);}
+.letter{
+  display:inline-block;opacity:0;transform:translate3d(0,22px,0);
+  will-change:transform,opacity;backface-visibility:hidden;
+}
+.brand-rule{
+  width:min(240px,50vw);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);will-change:transform;
+}
+.curly{
+  font-family:var(--font-script);font-weight:700;font-size:clamp(2.2rem,6vw,3.8rem);color:var(--tan);
+  opacity:0;transform:translate3d(0,12px,0);will-change:transform,opacity;
+}
+/* Animations start once fonts are ready (or after a short wait), so text doesn't jump mid-animation */
+.intro-play .letter{animation:letterIn 700ms var(--ease-smooth) both;animation-delay:calc(100ms + (var(--i) * 45ms));}
+.intro-play .brand-rule{animation:ruleIn 600ms var(--ease-smooth) both;animation-delay:650ms;}
+.intro-play .curly{animation:curlyIn 650ms var(--ease-smooth) both;animation-delay:850ms;}
+@keyframes letterIn{from{opacity:0;transform:translate3d(0,22px,0);}to{opacity:1;transform:translate3d(0,0,0);}}
+@keyframes ruleIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes curlyIn{from{opacity:0;transform:translate3d(0,12px,0);}to{opacity:1;transform:translate3d(0,0,0);}}
+
+.skip-intro{
+  position:absolute;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:transparent;color:var(--tan);border:1px solid rgba(216,180,138,.4);border-radius:999px;
+  padding:10px 20px;font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  transition:background 180ms ease,color 180ms ease;
+}
+.skip-intro:hover{background:rgba(216,180,138,.14);color:var(--cream);}
+.skip-intro:focus-visible{outline-color:var(--gold);}
+
+/* ---------- Shop ---------- */
+#shop{min-height:100vh;min-height:100dvh;background:var(--paper);}
+/* While the intro runs the shop waits below the screen and is hidden from keyboards and screen readers */
+.intro-on #shop{visibility:hidden;transform:translate3d(0,100vh,0);will-change:transform;}
+.intro-on.intro-exit #shop{visibility:visible;transform:translate3d(0,0,0);transition:transform var(--curtain-ms) var(--ease-curtain);}
+
+.topbar{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px var(--gutter);background:rgba(251,247,239,.88);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(44,26,17,.08);
+}
+.topbar-left{display:flex;align-items:center;gap:16px;min-width:0;}
+.back-link{
+  display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border:1px solid rgba(44,26,17,.15);
+  border-radius:999px;background:var(--white);color:var(--brown-dark);font-size:.82rem;font-weight:600;
+  transition:background 180ms ease,color 180ms ease,border-color 180ms ease;
+}
+.back-link svg{width:15px;height:15px;flex:none;stroke:currentColor;stroke-width:2;fill:none;}
+.back-link:hover{background:var(--brown-dark);color:var(--cream);border-color:var(--brown-dark);}
+.logotype{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--brown-dark);white-space:nowrap;}
+.logotype span{color:var(--brown-warm);}
+.tg-top-btn{
+  display:flex;align-items:center;gap:8px;background:var(--brown-dark);color:var(--cream);white-space:nowrap;
+  padding:10px 18px;border-radius:999px;font-size:.85rem;font-weight:600;transition:background 200ms ease,transform 150ms ease;
+}
+.tg-top-btn:hover{background:var(--black);transform:translate3d(0,-1px,0);}
+.tg-top-btn svg{width:16px;height:16px;fill:currentColor;flex:none;}
+
+.hero-banner{
+  margin:24px var(--gutter);padding:clamp(40px,6vw,70px);
+  background:linear-gradient(135deg,#3B2416 0%,#20130C 100%);border-radius:16px;color:var(--cream);
+  display:flex;flex-direction:column;align-items:flex-start;gap:20px;position:relative;overflow:hidden;
+  box-shadow:0 20px 40px -15px rgba(44,26,17,.3);
+}
+.hero-banner::after{
+  content:"";position:absolute;right:-50px;bottom:-50px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(199,164,103,.15) 0%,transparent 70%);pointer-events:none;
+}
+.hero-tag{
+  background:rgba(199,164,103,.2);color:var(--gold);padding:6px 14px;border-radius:999px;
+  font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;border:1px solid rgba(199,164,103,.3);
+}
+.hero-banner h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.1;max-width:20ch;position:relative;z-index:1;}
+.hero-banner p{font-size:1.05rem;color:var(--tan);max-width:45ch;line-height:1.6;margin:0;position:relative;z-index:1;}
+
+.noscript-msg{
+  margin:24px var(--gutter);padding:20px;background:var(--white);border:1px solid rgba(44,26,17,.12);
+  border-radius:var(--radius-card);color:var(--brown-dark);line-height:1.5;
+}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:100%;padding:20px var(--gutter) 80px;}
+.card{
+  min-width:0;background:var(--white);border:1px solid rgba(44,26,17,.08);border-radius:var(--radius-card);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform 250ms var(--ease-smooth),box-shadow 250ms var(--ease-smooth);
+}
+.card:hover{transform:translate3d(0,-4px,0);box-shadow:0 12px 24px -10px rgba(44,26,17,.12);}
+.card .ph{
+  aspect-ratio:1/1;width:100%;background:linear-gradient(135deg,#F4ECE1 0%,#E8DCB9 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--brown-mid);
+}
+.card .ph svg{width:36px;height:36px;opacity:.55;}
+.card .ph span{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+.card-body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1;}
+.card-body h3{font-size:1.1rem;font-weight:600;color:var(--black);}
+
+.price{font-size:1.05rem;font-weight:700;color:var(--brown-text);}
+.order-btn{
+  margin-top:auto;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--brown-dark);color:var(--cream);border:none;border-radius:6px;padding:13px;
+  font-size:.9rem;font-weight:600;transition:background 200ms ease,transform 100ms ease;
+}
+.order-btn:hover{background:var(--brown-mid);}
+.order-btn:active{transform:scale(.98);}
+.order-btn svg{width:16px;height:16px;fill:currentColor;flex:none;}
+
+footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px solid rgba(44,26,17,.08);text-align:center;}
+
+/* Three columns is the widest layout on purpose: 6 products = two full rows of 3.
+   If you grow to 8 or 12 products, you can add a 4-column rule for very wide screens. */
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:600px){
+  .topbar{padding:12px var(--gutter);}
+  .logotype{font-size:1.15rem;}
+  .back-link{padding:8px 12px;font-size:.78rem;}
+  .back-link .back-text{display:none;}
+  .tg-top-btn{padding:9px 13px;font-size:.78rem;}
+  .hero-banner{margin-top:18px;}
+  .grid{grid-template-columns:1fr;gap:20px;}
+}
+@media (hover:none){
+  .card:hover{transform:none;box-shadow:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms !important;animation-delay:0ms !important;transition-duration:1ms !important;scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div class="intro-inner">
+    <div class="brand" aria-hidden="true">
+      <span class="word brown">
+        <span class="letter" style="--i:0">Q</span><span class="letter" style="--i:1">a</span><span class="letter" style="--i:2">c</span><span class="letter" style="--i:3">h</span><span class="letter" style="--i:4">a</span>
+      </span>
+      <span class="word white">
+        <span class="letter" style="--i:5">C</span><span class="letter" style="--i:6">r</span><span class="letter" style="--i:7">a</span><span class="letter" style="--i:8">f</span><span class="letter" style="--i:9">t</span>
+      </span>
+    </div>
+    <div class="brand-rule"></div>
+    <div class="curly">Crafted in Quiet Beauty</div>
+  </div>
+  <button type="button" class="skip-intro" id="skipIntro">Skip intro</button>
+</div>
+
+<div id="shop">
+  <header class="topbar">
+    <div class="topbar-left">
+      <!-- If this page lives in a different folder from your home page, change this link (for example to "/") -->
+      <a class="back-link" href="index.html" aria-label="Back to home page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        <span class="back-text">Back</span>
+      </a>
+      <div class="logotype"><span>Qacha</span> Craft</div>
+    </div>
+    <!--
+      The Telegram username is set ONCE in the config at the bottom of this file (TELEGRAM_USERNAME).
+      The script updates this link automatically. The address below is only the fallback used when
+      JavaScript is off, so if you ever change the username, change it here too.
+    -->
+    <a class="tg-top-btn" data-tg-link href="https://t.me/Edennigussie" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 3.6c.3-1.2-.9-2-2-1.6L1.9 9.9c-1.1.4-1.1 2 0 2.4l4.9 1.6 1.9 5.9c.3.9 1.5 1.1 2.1.3l2.6-3.2 5 3.7c.9.6 2.1.1 2.3-1L21.9 3.6zM8.6 13.4l9.4-6.9c.3-.2.6.1.4.4l-7.8 7.3c-.3.3-.5.7-.5 1.1l-.2 2.3-1-3.4c-.1-.4 0-.6.3-.8z"/></svg>
+      Telegram Chat<span class="sr-only"> (opens in a new tab)</span>
+    </a>
+  </header>
+
+  <main>
+    <section class="hero-banner">
+      <div class="hero-tag">Art Collection</div>
+      <h1>Discover Art Made to Be Remembered</h1>
+      <p>Explore a curated collection of distinctive artworks and handcrafted pieces created by independent artists and makers.</p>
+    </section>
+
+    <noscript>
+      <p class="noscript-msg">The product list needs JavaScript to show. To order without it, use the Telegram Chat button at the top of this page.</p>
+    </noscript>
+
+    <h2 class="sr-only">Products</h2>
+    <div class="grid" id="productGrid"></div>
+  </main>
+
+  <footer>&copy; 2026 Qacha Craft. A curated collection of distinctive art and handcrafted pieces.</footer>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* =====================================================================
+     CONFIG: everything you normally edit is in this block
+     ===================================================================== */
+  const TELEGRAM_USERNAME = "Edennigussie";
+  const CURRENCY = "ETB";
+
+  // Message that appears pre-typed in your Telegram chat when someone taps "Order".
+  // {product} and {price} are replaced automatically. You can write this in Amharic too.
+  const ORDER_MESSAGE = "Hello Qacha Craft! I'd like to order: {product} ({price}).";
+
+  // image: use a small file (WebP, ideally under 80 KB), e.g. "images/vase.webp". null = placeholder.
+  const PRODUCTS = [
+    { id: 1, name: "Terracotta Vase",    price: 28, image: null },
+    { id: 2, name: "Woven Clay Bowl",    price: 34, image: null },
+    { id: 3, name: "Ceramic Mug Set",    price: 22, image: null },
+    { id: 4, name: "Carved Wood Tray",   price: 45, image: null },
+    { id: 5, name: "Glazed Tea Pot",     price: 50, image: null },
+    { id: 6, name: "Minimalist Planter", price: 26, image: null }
+  ];
+  /* ===================================================================== */
+
+  const TG_BASE = "https://t.me/" + encodeURIComponent(TELEGRAM_USERNAME);
+
+  const root = document.documentElement;
+  const grid = document.getElementById("productGrid");
+  const intro = document.getElementById("intro");
+  const skipBtn = document.getElementById("skipIntro");
+
+  const iconImage = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>';
+  const iconTg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 3.6c.3-1.2-.9-2-2-1.6L1.9 9.9c-1.1.4-1.1 2 0 2.4l4.9 1.6 1.9 5.9c.3.9 1.5 1.1 2.1.3l2.6-3.2 5 3.7c.9.6 2.1.1 2.3-1L21.9 3.6zM8.6 13.4l9.4-6.9c.3-.2.6.1.4.4l-7.8 7.3c-.3.3-.5.7-.5 1.1l-.2 2.3-1-3.4c-.1-.4 0-.6.3-.8z"/></svg>';
+
+  function formatPrice(n){
+    const num = Number(n);
+    if(!isFinite(num)) return "";
+    const text = Number.isInteger(num)
+      ? num.toLocaleString("en-US")
+      : num.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return CURRENCY + " " + text;
+  }
+
+  function orderUrl(p){
+    const message = ORDER_MESSAGE
+      .replace("{product}", function(){ return p.name; })
+      .replace("{price}", function(){ return formatPrice(p.price); });
+    return TG_BASE + "?text=" + encodeURIComponent(message);
+  }
+
+  /* ---------- Telegram links outside the product cards ---------- */
+  document.querySelectorAll("[data-tg-link]").forEach(function(a){ a.href = TG_BASE; });
+
+  /* ---------- Cards ---------- */
+  function createCard(p, index){
+    const card = document.createElement("article");
+    card.className = "card";
+    card.dataset.id = p.id;
+
+    const ph = document.createElement("div");
+    ph.className = "ph";
+
+    function showPlaceholder(){
+      ph.setAttribute("aria-hidden", "true"); // decorative, so screen readers skip it
+      ph.innerHTML = iconImage + "<span>Art Collection</span>";
+    }
+
+    if(p.image){
+      const img = document.createElement("img");
+      img.src = p.image;
+      img.alt = p.alt || p.name;
+      img.width = 600;
+      img.height = 600;
+      img.decoding = "async";
+      img.loading = index < 2 ? "eager" : "lazy"; // first two are near the top of the page
+      img.addEventListener("error", showPlaceholder); // broken file? show the placeholder, not a broken icon
+      ph.appendChild(img);
+    }else{
+      showPlaceholder();
+    }
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const title = document.createElement("h3");
+    title.textContent = p.name;
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = formatPrice(p.price);
+
+    // A real link (not a button): works with middle-click, long-press "copy link", and without extra JavaScript.
+    const order = document.createElement("a");
+    order.className = "order-btn";
+    order.href = orderUrl(p);
+    order.target = "_blank";
+    order.rel = "noopener noreferrer";
+    order.insertAdjacentHTML("afterbegin", iconTg);
+
+    const label = document.createElement("span");
+    label.textContent = "Order on Telegram";
+    const hint = document.createElement("span");
+    hint.className = "sr-only";
+    hint.textContent = ": " + p.name + " (opens in a new tab)";
+    label.appendChild(hint);
+    order.appendChild(label);
+
+    body.append(title, price, order);
+    card.append(ph, body);
+    return card;
+  }
+
+  PRODUCTS.forEach(function(p, i){ grid.appendChild(createCard(p, i)); });
+
+  /* ---------- Intro sequence ---------- */
+  // The head script decides whether the intro plays. If it didn't switch it on, there is nothing to do.
+  if(!root.classList.contains("intro-on")) return;
+
+  const HOLD_MS = 1900;        // how long the finished intro stays on screen (starts when the animation starts)
+  const CURTAIN_MS = 1000;     // curtain speed
+  const FAST_CURTAIN_MS = 450; // curtain speed when "Skip intro" is used
+  const FONT_WAIT_MS = 800;    // longest we wait for fonts before starting anyway
+
+  let opened = false;
+
+  function finishIntro(){
+    root.classList.remove("intro-on", "intro-play", "intro-exit");
+    root.style.removeProperty("--curtain-ms");
+    clearTimeout(window.__qcFailsafe);
+  }
+
+  function openShop(fast){
+    if(opened) return;
+    opened = true;
+    const ms = fast === true ? FAST_CURTAIN_MS : CURTAIN_MS;
+    root.style.setProperty("--curtain-ms", ms + "ms");
+    try{ sessionStorage.setItem("qc_intro", "1"); }catch(e){}
+    window.scrollTo(0, 0);
+    root.classList.add("intro-exit");
+    setTimeout(finishIntro, ms + 50);
+  }
+
+  skipBtn.addEventListener("click", function(){ openShop(true); });
+
+  function playIntro(){
+    if(opened) return;
+    // Start on the next frame so the browser has painted the initial state first.
+    requestAnimationFrame(function(){
+      if(opened) return;
+      root.classList.add("intro-play");
+      setTimeout(openShop, HOLD_MS);
+    });
+  }
+
+  // Wait for the font stylesheet and the two intro fonts, but never longer than FONT_WAIT_MS.
+  function fontsReady(){
+    const fontLink = document.getElementById("gfonts");
+    const stylesheetLoaded = new Promise(function(resolve){
+      if(!fontLink || fontLink.media === "all") return resolve();
+      fontLink.addEventListener("load", resolve, { once: true });
+      fontLink.addEventListener("error", resolve, { once: true });
+    });
+    const fontsLoaded = stylesheetLoaded.then(function(){
+      if(!document.fonts || !document.fonts.load) return;
+      return Promise.all([
+        document.fonts.load("700 1em Fraunces"),
+        document.fonts.load("700 1em Caveat")
+      ]);
+    }).catch(function(){});
+    return Promise.race([
+      fontsLoaded,
+      new Promise(function(resolve){ setTimeout(resolve, FONT_WAIT_MS); })
+    ]);
+  }
+
+  fontsReady().then(playIntro);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 75% 45%, #392317 0%, transparent 35%),
+        linear-gradient(135deg, #2d1b11, #1f1009);
+
+      color: #fff5e7;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+
+    /* =========================
+       BACKGROUND SHAPES
+    ========================= */
+
+    body::before {
+      content: "";
+      position: absolute;
+
+      width: 500px;
+      height: 180px;
+
+      bottom: -100px;
+      left: -100px;
+
+      background: #4b301f;
+
+      border-radius: 50% 50% 0 0;
+
+      transform: rotate(25deg);
+
+      opacity: 0.8;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+
+      width: 550px;
+      height: 180px;
+
+      bottom: -110px;
+      right: -130px;
+
+      background: #4b301f;
+
+      border-radius: 50% 50% 0 0;
+
+      transform: rotate(-25deg);
+
+      opacity: 0.8;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding-top: 32px;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .nav-links a {
+      color: #f4dfc3;
+
+      text-decoration: none;
+
+      font-size: 16px;
+
+      padding: 8px 0;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #f0c98f;
+
+      transform: translateY(-2px);
+    }
+
+    .nav-links .active {
+      color: #f0c98f;
+
+      border-bottom: 2px solid #b88752;
+    }
+
+
+    /* =========================
+       MAIN CONTENT
+    ========================= */
+
+    main {
+      width: 100%;
+      max-width: 1250px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      position: relative;
+      z-index: 1;
+    }
+
+
+    /* =========================
+       MAIN TEXT
+    ========================= */
+
+    .Main-text {
+      margin-top: 115px;
+
+      font-size: 4.2rem;
+      font-weight: 600;
+
+      text-align: center;
+
+      letter-spacing: -2px;
+
+      color: #fff5e7;
+    }
+
+    .subtitle {
+      max-width: 570px;
+
+      margin-top: 22px;
+
+      text-align: center;
+
+      font-size: 18px;
+      line-height: 1.7;
+
+      color: #ead0aa;
+    }
+
+
+    /* =========================
+       CONTACT BOXES
+    ========================= */
+
+    .contacts {
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+
+      gap: 0;
+
+      margin-top: 42px;
+    }
+
+    .box {
+      width: 31%;
+
+      min-height: 425px;
+
+      padding: 32px 38px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(75, 48, 31, 0.55),
+          rgba(57, 35, 23, 0.35)
+        );
+
+      border: 1px solid rgba(184, 135, 82, 0.28);
+
+      border-radius: 12px;
+
+      position: relative;
+
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .box + .box {
+      margin-left: 30px;
+    }
+
+    .box:hover {
+      transform: translateY(-8px);
+
+      border-color: #b88752;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(75, 48, 31, 0.75),
+          rgba(57, 35, 23, 0.55)
+        );
+
+      box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(184, 135, 82, 0.08);
+    }
+
+
+    /* =========================
+       ICON
+    ========================= */
+
+    .icon {
+      width: 64px;
+      height: 64px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 25px;
+
+      border-radius: 50%;
+
+      background: #4b301f;
+
+      color: #f4dfc3;
+
+      font-size: 27px;
+
+      border: 1px solid rgba(184, 135, 82, 0.25);
+
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .box:hover .icon {
+      background: #b88752;
+
+      transform: scale(1.08);
+    }
+
+
+    /* =========================
+       BOX HEADINGS
+    ========================= */
+
+    .box h2 {
+      font-size: 25px;
+
+      margin-bottom: 18px;
+
+      color: #fff5e7;
+    }
+
+    .box p {
+      color: #ead0aa;
+
+      font-size: 16px;
+
+      line-height: 1.65;
+
+      margin-bottom: 28px;
+    }
+
+
+    /* =========================
+       CONTACT INFORMATION
+    ========================= */
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      gap: 17px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+
+      gap: 17px;
+
+      color: #f4dfc3;
+
+      font-size: 16px;
+    }
+
+    .info-item span {
+      width: 22px;
+
+      color: #f0c98f;
+
+      font-size: 19px;
+
+      text-align: center;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      body {
+        overflow-y: auto;
+      }
+
+      .Main-text {
+        margin-top: 80px;
+
+        font-size: 3rem;
+      }
+
+      .contacts {
+        flex-direction: column;
+
+        align-items: center;
+
+        padding: 0 25px;
+
+        padding-bottom: 50px;
+      }
+
+      .box {
+        width: 100%;
+
+        max-width: 500px;
+      }
+
+      .box + .box {
+        margin-left: 0;
+
+        margin-top: 20px;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      nav {
+        padding-top: 25px;
+      }
+
+      .nav-links {
+        gap: 25px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+      }
+
+      .Main-text {
+        font-size: 2.5rem;
+
+        letter-spacing: -1px;
+
+        padding: 0 20px;
+      }
+
+      .subtitle {
+        padding: 0 25px;
+
+        font-size: 15px;
+      }
+
+      .box {
+        padding: 28px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- Navigation -->
+
+  <nav>
+
+    <div class="nav-links">
+
+      <a href="#">Home</a>
+
+      <a href="#">About us</a>
+
+      <a href="#" class="active">Contact</a>
+
+    </div>
+
+  </nav>
+
+
+
+  <main>
+
+
+    <!-- Main heading -->
+
+    <div class="Main-text">
+      Get in touch with us
+    </div>
+
+    <p class="subtitle">
+      We'd love to hear from you. Whether you have a question,
+      a project in mind, or just want to say hello — we're here.
+    </p>
+
+
+
+    <!-- Contact sections -->
+
+    <div class="contacts">
+
+
+      <!-- Box 1 -->
+
+      <div class="box">
+
+        <div class="icon">
+          ♧
+        </div>
+
+        <h2>
+          Customer Support
+        </h2>
+
+        <p>
+          Need help? Our support team is available
+          24/7 to assist you with any questions
+          or issues you may have.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span>✉</span>
+            support@monkeytype.com
+          </div>
+
+          <div class="info-item">
+            <span>⌕</span>
+            +251 911 123 456
+          </div>
+
+          <div class="info-item">
+            <span>◷</span>
+            24/7
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Box 2 -->
+
+      <div class="box">
+
+        <div class="icon">
+          ✉
+        </div>
+
+        <h2>
+          General Inquiries
+        </h2>
+
+        <p>
+          Have a question, suggestion, or just want
+          to learn more about us? We'd love to
+          hear from you.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span>✉</span>
+            hello@monkeytype.com
+          </div>
+
+          <div class="info-item">
+            <span>⌕</span>
+            +251 911 987 654
+          </div>
+
+          <div class="info-item">
+            <span>◷</span>
+            Mon – Fri, 9AM – 6PM
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Box 3 -->
+
+      <div class="box">
+
+        <div class="icon">
+          ♢
+        </div>
+
+        <h2>
+          Business / Partnerships
+        </h2>
+
+        <p>
+          Interested in working together?
+          We're always open to new opportunities
+          and collaborations.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span>✉</span>
+            partnerships@monkeytype.com
+          </div>
+
+          <div class="info-item">
+            <span>⌕</span>
+            +251 912 345 678
+          </div>
+
+          <div class="info-item">
+            <span>◷</span>
+            Mon – Fri, 9AM – 6PM
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+</body>
+</html>
