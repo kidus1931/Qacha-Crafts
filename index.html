@@ -4,246 +4,406 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
+
+  <style>
+    html{
+      -webkit-text-size-adjust:100%;
+      text-size-adjust:100%;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      background:
+        linear-gradient(
+          90deg,
+          rgba(45, 27, 17, 0.82) 0%,
+          rgba(45, 27, 17, 0.62) 38%,
+          rgba(45, 27, 17, 0.18) 75%,
+          rgba(45, 27, 17, 0.28) 100%
+        ),
+        url('IMG_20260918_210239_114.jpg') no-repeat center center / cover;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:flex-start;
+
+      height:100vh;
+
+      color:#f8eee0;
+
+      overflow:hidden;
+    }
+
+
+    /* -------------------------
+       LOGO
+    ------------------------- */
+
+    .text1{
+      font-family:cursive, arial, Helvetica, sans-serif;
+      font-size:3rem;
+      margin-top:5vh;
+      margin-left:5vw;
+
+      color:#f7ead8;
+
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.35);
+
+      letter-spacing:-1px;
+    }
+
+
+    /* -------------------------
+       MAIN CONTENT
+    ------------------------- */
+
+    .main-text{
+      width:40vw;
+      margin-left:10vw;
+
+      margin-top:-3vh;
+
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+    }
+
+
+    .text2{
+      font-size:4rem;
+      font-family:Georgia, 'Times New Roman', serif;
+
+      line-height:1.05;
+
+      color:#fff5e7;
+
+      letter-spacing:-2px;
+
+      text-shadow:
+        0 3px 12px rgba(0,0,0,0.45);
+    }
+
+
+    .text3{
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:1.15rem;
+
+      line-height:1.65;
+
+      margin-top:2.5vh;
+
+      max-width:38vw;
+
+      color:#f0e2d1;
+
+      text-shadow:
+        0 2px 7px rgba(0,0,0,0.55);
+    }
+
+
+    /* -------------------------
+       EXPLORE BUTTON
+    ------------------------- */
+
+    .explore{
+      margin-top:3vh;
+
+      padding:1.2rem 2.2rem;
+
+      border:none;
+      border-radius:50px;
+
+      background:#ead0aa;
+      color:#392317;
+
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:1rem;
+      font-weight:bold;
+
+      cursor:pointer;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+
+    .explore:hover{
+      background:#f4dfc3;
+
+      transform:translateY(-3px);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.32);
+    }
+
+
+    .explore:active{
+      transform:translateY(0);
+    }
+
+
+    /* -------------------------
+       NAVIGATION
+    ------------------------- */
+
+    nav{
+      width:100vw;
+      height:10vh;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      gap:1.2rem;
+
+      padding-bottom:2vh;
+    }
+
+
+    nav button,
+    nav a{
+      min-width:9rem;
+
+      padding:0.8rem 1.5rem;
+
+      border:1px solid rgba(255,245,231,0.7);
+
+      border-radius:50px;
+
+      background:rgba(75, 48, 31, 0.42);
+
+      -webkit-backdrop-filter:blur(8px);
+      backdrop-filter:blur(8px);
+
+      color:#fff5e7;
+
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:0.95rem;
+
+      text-align:center;
+      text-decoration:none;
+
+      cursor:pointer;
+
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+
+    nav button:hover,
+    nav a:hover{
+      background:#b88752;
+
+      border-color:#b88752;
+
+      transform:translateY(-3px);
+    }
+
+
+    nav button:active,
+    nav a:active{
+      transform:translateY(0);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+       (keep these AFTER the base styles so they override them)
+    ========================================================= */
+
+
+    /* -------------------------
+       Small screens or short windows (tablets, phones,
+       phones held sideways): let the page scroll instead
+       of cutting content off
+    ------------------------- */
+
+    @media (max-width:900px), (max-height:650px){
+
+      body{
+        height:auto;
+        min-height:100vh;
+        min-height:100dvh;   /* accounts for the phone browser address bar */
+
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+
+      nav{
+        height:auto;
+        padding:1.2rem 1rem 2rem;
+      }
+    }
+
+
+    /* -------------------------
+       Tablets
+    ------------------------- */
+
+    @media (max-width:900px){
+
+      .text1{
+        font-size:2.6rem;
+      }
+
+      .main-text{
+        width:70vw;
+        margin-left:8vw;
+        margin-top:0;
+      }
+
+      .text2{
+        font-size:3rem;
+        letter-spacing:-1.5px;
+      }
+
+      .text3{
+        max-width:100%;
+      }
+    }
+
+
+    /* -------------------------
+       Phones
+    ------------------------- */
+
+    @media (max-width:600px){
+
+      /* the text now spans the full width, so darken evenly
+         top to bottom instead of only on the left */
+      body{
+        background:
+          linear-gradient(
+            180deg,
+            rgba(45, 27, 17, 0.62) 0%,
+            rgba(45, 27, 17, 0.74) 55%,
+            rgba(45, 27, 17, 0.9) 100%
+          ),
+          url('IMG_20260918_210239_114.jpg') no-repeat center center / cover;
+      }
+
+      .text1{
+        font-size:2.2rem;
+        margin-top:4vh;
+        margin-left:1.5rem;
+      }
+
+      .main-text{
+        width:100%;
+        margin:2.5rem 0;
+        padding:0 1.5rem;
+      }
+
+      .text2{
+        font-size:2.5rem;
+        letter-spacing:-1px;
+      }
+
+      .text3{
+        font-size:1rem;
+        line-height:1.6;
+        margin-top:1.2rem;
+      }
+
+      .explore{
+        margin-top:1.8rem;
+        padding:1rem 2rem;
+      }
+
+      nav{
+        width:100%;
+        gap:0.6rem;
+        padding:1rem 1rem 1.8rem;
+      }
+
+      /* three equal-width buttons in one row */
+      nav button,
+      nav a{
+        flex:1 1 0;
+        min-width:0;
+
+        padding:0.85rem 0.5rem;
+
+        font-size:0.9rem;
+      }
+    }
+
+
+    /* -------------------------
+       Very small phones
+    ------------------------- */
+
+    @media (max-width:360px){
+
+      .text1{
+        font-size:2rem;
+      }
+
+      .main-text{
+        padding:0 1.2rem;
+      }
+
+      .text2{
+        font-size:2.1rem;
+      }
+
+      .text3{
+        font-size:0.95rem;
+      }
+
+      nav{
+        gap:0.5rem;
+        padding:1rem 0.8rem 1.5rem;
+      }
+
+      nav button,
+      nav a{
+        font-size:0.85rem;
+      }
+    }
+
+  </style>
 </head>
-
-<style>
-  *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-  }
-
-  body{
-    background:
-      linear-gradient(
-        90deg,
-        rgba(45, 27, 17, 0.82) 0%,
-        rgba(45, 27, 17, 0.62) 38%,
-        rgba(45, 27, 17, 0.18) 75%,
-        rgba(45, 27, 17, 0.28) 100%
-      ),
-      url('IMG_20260918_210239_114.jpg') no-repeat center center / cover;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:flex-start;
-
-    height:100vh;
-
-    color:#f8eee0;
-
-    overflow:hidden;
-  }
-
-
-  /* -------------------------
-     LOGO
-  ------------------------- */
-
-  .text1{
-    font-family:cursive, arial, Helvetica, sans-serif;
-    font-size:3rem;
-    margin-top:5vh;
-    margin-left:5vw;
-
-    color:#f7ead8;
-
-    text-shadow:
-      0 2px 8px rgba(0,0,0,0.35);
-
-    letter-spacing:-1px;
-  }
-
-
-  /* -------------------------
-     MAIN CONTENT
-  ------------------------- */
-
-  .main-text{
-    width:40vw;
-    margin-left:10vw;
-
-    margin-top:-3vh;
-
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-
-  .text2{
-    font-size:4rem;
-    font-family:Georgia, 'Times New Roman', serif;
-
-    line-height:1.05;
-
-    color:#fff5e7;
-
-    letter-spacing:-2px;
-
-    text-shadow:
-      0 3px 12px rgba(0,0,0,0.45);
-  }
-
-
-  .text3{
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:1.15rem;
-
-    line-height:1.65;
-
-    margin-top:2.5vh;
-
-    max-width:38vw;
-
-    color:#f0e2d1;
-
-    text-shadow:
-      0 2px 7px rgba(0,0,0,0.55);
-  }
-
-
-  /* -------------------------
-     EXPLORE BUTTON
-  ------------------------- */
-
-  .explore{
-    margin-top:3vh;
-
-    padding:1.2rem 2.2rem;
-
-    border:none;
-    border-radius:50px;
-
-    background:#ead0aa;
-    color:#392317;
-
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:1rem;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-      0 8px 25px rgba(0,0,0,0.25);
-
-    transition:
-      transform 0.25s ease,
-      background 0.25s ease,
-      box-shadow 0.25s ease;
-  }
-
-
-  .explore:hover{
-    background:#f4dfc3;
-
-    transform:translateY(-3px);
-
-    box-shadow:
-      0 12px 30px rgba(0,0,0,0.32);
-  }
-
-
-  .explore:active{
-    transform:translateY(0);
-  }
-
-
-  /* -------------------------
-     NAVIGATION
-  ------------------------- */
-
-  nav{
-    width:100vw;
-    height:10vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    gap:1.2rem;
-
-    padding-bottom:2vh;
-  }
-
-
-  nav button{
-    min-width:9rem;
-
-    padding:0.8rem 1.5rem;
-
-    border:1px solid rgba(255,245,231,0.7);
-
-    border-radius:50px;
-
-    background:rgba(75, 48, 31, 0.42);
-
-    backdrop-filter:blur(8px);
-
-    color:#fff5e7;
-
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:0.95rem;
-
-    cursor:pointer;
-
-    transition:
-      background 0.25s ease,
-      transform 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-
-  nav button:hover{
-    background:#b88752;
-
-    border-color:#b88752;
-
-    transform:translateY(-3px);
-  }
-
-
-  nav button:active{
-    transform:translateY(0);
-  }
-  nav a{
-    color:#fff5e7;text-decoration:none;
-  }
-
-</style>
 
 <body>
 
-  <p class='text1'>Qacha crafts</p>
+  <p class="text1">Qacha crafts</p>
 
-  <div class='main-text'>
+  <div class="main-text">
 
-    <P class='text2'>
+    <p class="text2">
       Qacha crafts, The best craft in all of Sheger
-    </P>
+    </p>
 
-    <p class='text3'>
+    <p class="text3">
       we make the best crafts using qacha and we also make different artistic images and different artistic home decors to transform your house
     </p>
 
-    <button class='explore' id="Explore">
+    <button class="explore">
       Explore crafts
     </button>
 
   </div>
 
   <nav>
-    <button id="contact">contact</button>
-    <button><a href="Qacha_Crafts Portfolio.pdf">Portfolio</a></button>
+    <button>contact</button>
+    <button>about us</button>
+    <a href="Qacha_Crafts Portfolio.pdf">Portfolio</a>
   </nav>
-<script>
-  document.getElementById("contact").addEventListener("click", function(){
-    window.location.href = "Contact.html";
-  })
-  document.getElementById("Explore").addEventListener("click", function(){
-    window.location.href = "Products.html";
-  })
-</script>
+
 </body>
 </html>
