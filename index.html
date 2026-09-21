@@ -401,7 +401,7 @@
 
   <nav>
     <button class="contact" id="Contact">contact</button>
-    <a href="Qacha_Crafts Portfolio.pdf">Portfolio</a>
+    <a onclick=AboutUs() id="About">About us</a>
   </nav>
 <script>
   document.getElementById("Explore").addEventListener("click", function(){
@@ -409,7 +409,9 @@
   })
     document.getElementById("Contact").addEventListener("click", function(){
     window.location.href = "Contact.html";
-  })
+function AboutUs(){
+  windows.location.href = "About us.html";
+}
 </script>
 </body>
 </html>
