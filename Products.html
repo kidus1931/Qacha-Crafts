@@ -180,6 +180,7 @@ button{font-family:inherit;cursor:pointer;}
 }
 
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:100%;padding:20px var(--gutter) 80px;}
+.grid-msg{grid-column:1/-1;margin:0;padding:40px 0;text-align:center;color:#6F604A;line-height:1.5;}
 .card{
   min-width:0;background:var(--white);border:1px solid rgba(44,26,17,.08);border-radius:var(--radius-card);
   overflow:hidden;display:flex;flex-direction:column;
@@ -300,8 +301,16 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
   // {product} and {price} are replaced automatically. You can write this in Amharic too.
   const ORDER_MESSAGE = "Hello Qacha Craft! I'd like to order: {product} ({price}).";
 
-  // image: use a small file (WebP, ideally under 80 KB), e.g. "images/vase.webp". null = placeholder.
-  const PRODUCTS = [
+  // OWNER-EDITABLE PRODUCT LIST (a Google Sheet).
+  // Paste the sheet's "Publish to web" CSV link between the quotes. While it is empty, the page uses BACKUP_PRODUCTS below.
+  const SHEET_CSV_URL = "";
+
+  // If the sheet's image cell holds just a file name (like "vase.webp"), the file is looked up in this folder.
+  const IMAGE_FOLDER = "images/";
+
+  // BACKUP LIST: only used when the sheet can't be reached AND nothing was saved from an earlier visit.
+  // image: a full https:// link, a file name inside IMAGE_FOLDER, or null for a placeholder.
+  const BACKUP_PRODUCTS = [
     { id: 1, name: "Terracotta Vase",    price: 28, image: null },
     { id: 2, name: "Woven Clay Bowl",    price: 34, image: null },
     { id: 3, name: "Ceramic Mug Set",    price: 22, image: null },
@@ -333,7 +342,7 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
   function orderUrl(p){
     const message = ORDER_MESSAGE
       .replace("{product}", function(){ return p.name; })
-      .replace("{price}", function(){ return formatPrice(p.price); });
+      .replace("{price}", function(){ return formatPrice(p.price) || "price on request"; });
     return TG_BASE + "?text=" + encodeURIComponent(message);
   }
 
@@ -376,7 +385,7 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
 
     const price = document.createElement("div");
     price.className = "price";
-    price.textContent = formatPrice(p.price);
+    price.textContent = formatPrice(p.price) || "Ask for price";
 
     // A real link (not a button): works with middle-click, long-press "copy link", and without extra JavaScript.
     const order = document.createElement("a");
@@ -399,7 +408,145 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
     return card;
   }
 
-  PRODUCTS.forEach(function(p, i){ grid.appendChild(createCard(p, i)); });
+  /* ---------- Product list: Google Sheet -> copy saved on this phone -> backup list ---------- */
+  const CACHE_KEY = "qc_products_v1";
+  // Anything in the sheet's "available" column that means "don't show this product":
+  const HIDDEN_WORDS = ["no", "n", "false", "0", "sold", "sold out", "hidden", "hide"];
+
+  // Reads CSV text (handles quotes, commas and line breaks inside cells).
+  function parseCSV(text){
+    const rows = [];
+    let row = [], cell = "", inQuotes = false;
+    text = String(text).replace(/^\uFEFF/, "");
+    for(let i = 0; i < text.length; i++){
+      const c = text[i];
+      if(inQuotes){
+        if(c === '"'){
+          if(text[i + 1] === '"'){ cell += '"'; i++; }
+          else inQuotes = false;
+        }else cell += c;
+      }else if(c === '"'){
+        inQuotes = true;
+      }else if(c === ","){
+        row.push(cell); cell = "";
+      }else if(c === "\n" || c === "\r"){
+        if(c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); cell = "";
+        rows.push(row); row = [];
+      }else cell += c;
+    }
+    if(cell !== "" || row.length){ row.push(cell); rows.push(row); }
+    return rows;
+  }
+
+  // Turns the sheet into a list of products. Returns null if it doesn't look like our sheet.
+  function parseSheet(text){
+    const rows = parseCSV(text);
+    if(!rows.length) return null;
+    const head = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    const col = {
+      name: head.indexOf("name"),
+      price: head.indexOf("price"),
+      image: head.indexOf("image"),
+      available: head.indexOf("available")
+    };
+    if(col.name < 0 || col.price < 0) return null; // header row missing or renamed
+    const list = [];
+    rows.slice(1).forEach(function(r, i){
+      const name = (r[col.name] || "").trim();
+      if(!name) return; // empty row
+      const avail = col.available >= 0 ? (r[col.available] || "").trim().toLowerCase() : "";
+      if(HIDDEN_WORDS.indexOf(avail) !== -1) return;
+      list.push({ id: i + 1, name: name, price: r[col.price], image: col.image >= 0 ? r[col.image] : "" });
+    });
+    return list;
+  }
+
+  // "1,200 birr" -> 1200. Nothing usable -> NaN (the card then says "Ask for price").
+  function toPrice(v){
+    if(typeof v === "number") return v;
+    const cleaned = String(v == null ? "" : v).replace(/[^0-9.]/g, "");
+    return cleaned === "" ? NaN : Number(cleaned);
+  }
+
+  // Accepts a full link, a Google Drive share link, or a file name from IMAGE_FOLDER.
+  function resolveImage(v){
+    const s = String(v == null ? "" : v).trim();
+    if(!s) return null;
+    if(/drive\.google\.com/i.test(s)){
+      const m = s.match(/\/d\/([\w-]+)/) || s.match(/[?&]id=([\w-]+)/);
+      if(m) return "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w800";
+    }
+    if(/^https?:\/\//i.test(s)) return s;
+    return IMAGE_FOLDER + encodeURI(s.replace(/^\/+/, ""));
+  }
+
+  function normalize(p, i){
+    return {
+      id: p.id != null ? p.id : i + 1,
+      name: String(p.name),
+      price: toPrice(p.price),
+      image: resolveImage(p.image),
+      alt: p.alt
+    };
+  }
+
+  function readCache(){
+    try{
+      const data = JSON.parse(localStorage.getItem(CACHE_KEY));
+      return Array.isArray(data) ? data : null;
+    }catch(e){ return null; }
+  }
+  function saveCache(list){
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+
+  function fetchText(url, ms){
+    const ctrl = "AbortController" in window ? new AbortController() : null;
+    const opts = { cache: "no-cache" };
+    if(ctrl) opts.signal = ctrl.signal;
+    const timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, ms);
+    return fetch(url, opts).then(function(res){
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      return res.text();
+    }).then(function(t){ clearTimeout(timer); return t; }, function(err){ clearTimeout(timer); throw err; });
+  }
+
+  function loadProducts(){
+    if(!SHEET_CSV_URL) return Promise.resolve(BACKUP_PRODUCTS);
+    return fetchText(SHEET_CSV_URL, 8000).then(function(text){
+      const list = parseSheet(text);
+      if(list === null) throw new Error("unexpected sheet format");
+      saveCache(list);
+      return list;
+    }).catch(function(){
+      const cached = readCache();
+      return cached !== null ? cached : BACKUP_PRODUCTS;
+    });
+  }
+
+  function renderProducts(raw){
+    grid.textContent = "";
+    grid.removeAttribute("aria-busy");
+    const list = raw.map(normalize);
+    if(!list.length){
+      const msg = document.createElement("p");
+      msg.className = "grid-msg";
+      msg.textContent = "New pieces are coming soon. Message us on Telegram to ask what is available.";
+      grid.appendChild(msg);
+      return;
+    }
+    list.forEach(function(p, i){ grid.appendChild(createCard(p, i)); });
+  }
+
+  // The request starts right away, so the data usually arrives while the intro is still playing.
+  grid.setAttribute("aria-busy", "true");
+  const loadingMsg = document.createElement("p");
+  loadingMsg.className = "grid-msg";
+  loadingMsg.setAttribute("role", "status");
+  loadingMsg.textContent = "Loading products…";
+  grid.appendChild(loadingMsg);
+  loadProducts().then(renderProducts).catch(function(){ renderProducts(BACKUP_PRODUCTS); });
 
   /* ---------- Intro sequence ---------- */
   // The head script decides whether the intro plays. If it didn't switch it on, there is nothing to do.
