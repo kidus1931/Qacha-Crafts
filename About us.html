@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About us</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9vh;
+  padding:7vh 5vw;
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(circle at 75% 20%, rgba(91,55,30,.65) 0%, transparent 30%),
+    radial-gradient(circle at 15% 70%, rgba(76,43,24,.45) 0%, transparent 28%),
+    linear-gradient(135deg,#2d1b11,#1f1009);
+
+  color:#fff5e7;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   MAIN TITLE
+========================= */
+
+#creator{
+  position:relative;
+  font-size:clamp(2.3rem,5vw,4rem);
+  font-weight:700;
+  letter-spacing:.02em;
+  text-align:center;
+  color:#ffe7c9;
+  margin-bottom:-4vh;
+}
+
+#creator::after{
+  content:"";
+  display:block;
+  width:90px;
+  height:3px;
+  margin:18px auto 0;
+  border-radius:20px;
+  background:#dca15d;
+}
+
+
+/* =========================
+   CREATOR IMAGE
+========================= */
+
+#eden{
+  width:190px;
+  height:190px;
+  object-fit:cover;
+
+  border-radius:50%;
+  border:3px solid #e1a765;
+  padding:6px;
+
+  background:#3b2416;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.35),
+    0 0 0 10px rgba(220,161,93,.07);
+}
+
+
+/* =========================
+   TEXT + IMAGE SECTIONS
+========================= */
+
+.section{
+  width:min(1050px,90vw);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:8vw;
+}
+
+.section img{
+  flex:0 0 auto;
+
+  width:min(390px,38vw);
+  aspect-ratio:1 / 1;
+  height:auto;
+
+  object-fit:cover;
+
+  border-radius:28% 12% 28% 12%;
+  border:2px solid rgba(225,167,101,.8);
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.35);
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+}
+
+.section img:hover{
+  transform:translateY(-7px);
+  box-shadow:
+    0 28px 55px rgba(0,0,0,.45);
+}
+
+.section p{
+  flex:1;
+
+  max-width:500px;
+
+  font-size:clamp(1rem,1.5vw,1.18rem);
+  line-height:1.8;
+  letter-spacing:.01em;
+
+  color:#f8e8d4;
+}
+
+
+/* =========================
+   FIRST STORY SECTION
+========================= */
+
+#about-creator{
+  margin-top:1vh;
+}
+
+#about-creator p::first-letter{
+  color:#e2a664;
+  font-weight:bold;
+}
+
+
+/* =========================
+   SECOND STORY SECTION
+========================= */
+
+#story{
+  flex-direction:row;
+}
+
+
+/* =========================
+   CREATIVE SECTIONS
+========================= */
+
+#creative-work,
+#creative-process{
+  width:min(1000px,90vw);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:3vh;
+}
+
+#creative-work > p,
+#creative-process > p{
+  position:relative;
+
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;
+  text-align:center;
+
+  color:#ffe1bd;
+  letter-spacing:.02em;
+}
+
+#creative-work > p::after,
+#creative-process > p::after{
+  content:"";
+  display:block;
+
+  width:70px;
+  height:2px;
+
+  margin:15px auto 0;
+
+  background:#dca15d;
+  border-radius:10px;
+}
+
+
+/* =========================
+   THREE IMAGE GALLERY
+========================= */
+
+.imgs{
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:3vw;
+
+  flex-wrap:wrap;
+}
+
+
+/*
+  SQUARE IMAGE SIZE
+
+  You DON'T need to edit the CSS
+  when replacing the images.
+
+  Just change:
+
+  src="creative1.jpg"
+
+  to your actual image name.
+*/
+
+.imgs img{
+  width:clamp(150px,23vw,220px);
+  aspect-ratio:1 / 1;
+  height:auto;
+
+  object-fit:cover;
+
+  border-radius:14px;
+
+  border:2px solid #dca15d;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.35);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    filter .3s ease;
+}
+
+.imgs img:hover{
+  transform:translateY(-8px) scale(1.02);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.45);
+
+  filter:brightness(1.08);
+}
+
+
+/* =========================
+   CONTACT SECTION
+========================= */
+
+#contacts{
+  padding-top:2vh;
+  padding-bottom:3vh;
+}
+
+#contacts img{
+  border-radius:20% 35% 20% 35%;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+  body{
+    gap:7vh;
+    padding:6vh 6vw;
+  }
+
+  #eden{
+    width:155px;
+    height:155px;
+  }
+
+  .section{
+    flex-direction:column;
+    gap:4vh;
+    text-align:center;
+  }
+
+  #story{
+    flex-direction:column;
+  }
+
+  .section img{
+    width:min(75vw,360px);
+  }
+
+  .section p{
+    width:100%;
+    max-width:600px;
+  }
+
+  .imgs{
+    gap:20px;
+  }
+
+  .imgs img{
+    width:min(40vw,180px);
+  }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:480px){
+
+  #creator{
+    font-size:2.2rem;
+  }
+
+  .imgs img{
+    width:130px;
+  }
+
+  .section img{
+    width:78vw;
+  }
+
+  .section p{
+    font-size:1rem;
+    line-height:1.7;
+  }
+}
+#Socials{
+    display:flex;justify-content:center;gap:20vw;
+}
+#Socials i{
+    font-size:2rem;
+}
+#edu{
+    font-size: 2rem;font-family: arial, Helvetica, Sans-Serif;
+}
+</style>
+</head>
+
+
+<body>
+
+  <p id="creator">Meet the creator</p>
+
+  <!-- Replace with creator's image -->
+  <img src="Eden.png" id="eden">
+
+<p id="edu">Eden Nigusse</p>
+  <!-- ABOUT CREATOR -->
+
+  <div id="about-creator" class="section">
+
+    <p>
+      Qacha_Crafts is a creative handmade brand created by Eden Nigussie,
+      bringing together natural materials and artistic expression.
+      Using jute rope, canvas, and acrylic paints, Eden creates unique décor
+      pieces that combine handmade authenticity with modern aesthetics.
+      Each piece reflects a thoughtful approach to creativity, detail,
+      and meaningful design.
+    </p>
+
+    <img src="Craft1.png">
+
+  </div>
+
+
+  <!-- STORY -->
+
+  <div id="story" class="section">
+
+    <img src="Craft2.png">
+
+    <p>
+      At Qacha_Crafts, simple materials are transformed into artistic and
+      meaningful décor pieces. From jute rope crafts and textured wall art
+      to canvas paintings, personalized home décor, gifts, and seasonal
+      decorations, each creation is designed to bring warmth, personality,
+      and an authentic handmade touch to a space.
+    </p>
+
+  </div>
+
+
+  <!-- CREATIVE WORK -->
+
+  <div id="creative-work">
+
+    <p>Our creative work</p>
+
+    <div class="imgs">
+
+      <!-- Just change the src names -->
+      <img src="Craft3.png">
+      <img src="Craft4.png">
+      <img src="Craft5.png">
+
+    </div>
+
+  </div>
+
+
+  <!-- CREATIVE PROCESS -->
+
+  <div id="creative-process">
+
+    <p>Our creative process</p>
+
+    <div class="imgs">
+
+      <!-- Just change the src names -->
+      <img src="Process1.png">
+      <img src="Process2.png">
+      <img src="Process3.png">
+
+    </div>
+
+  </div>
+
+
+  <!-- CONTACT -->
+
+  <div class="section" id="contacts">
+
+    <img src="Social.png">
+
+    <p>
+      Have an idea for a unique handmade piece?
+      Qacha_Crafts offers customizable options and creates pieces with a
+      focus on individuality and attention to detail. Get in touch with
+      Eden Nigussie through the available contact and social media channels
+      to explore the collection or discuss a custom creation.
+    </p>
+
+  </div>
+    <div id="Socials">
+    <i class="fa-brands fa-instagram" id="insta"></i>
+    <i class="fa-brands fa-tiktok" id="tik"></i>
+    <i class="fa-brands fa-telegram" id="tele"></i>
+    </div>
+<script>
+    document.getElementById("insta").addEventListener("click", function(){
+        window.location.href = "https://www.instagram.com/qacha_crafts/";
+    })
+    document.getElementById("tele").addEventListener("click", function(){
+        window.location.href = "https://web.telegram.org/a/#-1003861606655";
+    })
+    document.getElementById("tik").addEventListener("click", function(){
+        window.location.href = "";
+    })
+</script>
+</body>
+</html>
