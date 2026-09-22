@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About us</title>
+  <title>About — Qacha Craft</title>
+  <meta name="description" content="Meet Eden Nigussie, the maker behind Qacha Craft, and see the handmade jute, canvas, and decor pieces in her collection.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
 *{
@@ -87,6 +88,51 @@ body{
 .back-btn i{
   font-size:1rem;
   color:#e1a765;
+}
+
+
+/* =========================
+   SITE NAV (top right)
+========================= */
+
+.site-nav{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  padding:8px;
+  border-radius:30px;
+
+  background:rgba(45,27,17,.85);
+  border:2px solid #dca15d;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+
+.site-nav a{
+  padding:8px 14px;
+  border-radius:20px;
+
+  color:#fff5e7;
+  text-decoration:none;
+
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:.85rem;
+  font-weight:600;
+
+  transition:background .25s ease, color .25s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible{
+  background:#dca15d;
+  color:#2d1b11;
 }
 
 
@@ -327,22 +373,62 @@ body{
   border-radius:20% 35% 20% 35%;
 }
 
- #pdf {
-      color: #f4dfc3;
+#pdf{
+  color:#f4dfc3;
 
-      text-decoration: none;
+  text-decoration:none;
 
-      font-size: 16px;
+  font-size:16px;
 
-      padding: 8px 0;
+  padding:8px 0;
 
-      transition:
-        color 0.3s ease,
-        transform 0.3s ease;
-    }
-#pdf:hover{
-text-decoration:underline;transform:translateY(-2px);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
+
+#pdf:hover,
+#pdf:focus-visible{
+  text-decoration:underline;
+  transform:translateY(-2px);
+}
+
+
+/* =========================
+   SOCIAL ICON LINKS
+========================= */
+
+#Socials{
+  display:flex;
+  justify-content:center;
+  gap:20vw;
+}
+
+#Socials a{
+  color:#fff5e7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:color .25s ease, transform .25s ease;
+}
+
+#Socials a:hover,
+#Socials a:focus-visible{
+  color:#e1a765;
+  transform:translateY(-3px);
+}
+
+#Socials i{
+  font-size:2rem;
+}
+
+
+#edu{
+  font-size:2rem;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+
 /* =========================
    MOBILE
 ========================= */
@@ -360,6 +446,16 @@ text-decoration:underline;transform:translateY(-2px);
     left:14px;
     padding:8px 14px;
     font-size:.85rem;
+  }
+
+  .site-nav{
+    top:14px;
+    right:14px;
+  }
+
+  .site-nav a{
+    padding:7px 10px;
+    font-size:.78rem;
   }
 
   #eden{
@@ -393,23 +489,13 @@ text-decoration:underline;transform:translateY(-2px);
   .imgs img{
     width:min(40vw,180px);
   }
+
+  #pdf{
+    font-size:15px;
+  }
 }
- #pdf {
-      color: #f4dfc3;
 
-      text-decoration: none;
 
-      font-size: 16px;
-
-      padding: 8px 0;
-
-      transition:
-        color 0.3s ease,
-        transform 0.3s ease;
-    }
-#pdf:hover{
-text-decoration:underline;transform:translateY(-2px);
-}
 /* =========================
    SMALL PHONES
 ========================= */
@@ -421,10 +507,22 @@ text-decoration:underline;transform:translateY(-2px);
     gap:6px;
     font-size:.8rem;
   }
-#pdf{
-  font-size: 14px; }
+
   .back-btn i{
     font-size:.9rem;
+  }
+
+  .site-nav{
+    padding:6px;
+  }
+
+  .site-nav a{
+    padding:6px 9px;
+    font-size:.72rem;
+  }
+
+  #pdf{
+    font-size:14px;
   }
 
   #creator{
@@ -444,15 +542,6 @@ text-decoration:underline;transform:translateY(-2px);
     line-height:1.7;
   }
 }
-#Socials{
-    display:flex;justify-content:center;gap:20vw;
-}
-#Socials i{
-    font-size:2rem;
-}
-#edu{
-    font-size: 2rem;font-family: arial, Helvetica, Sans-Serif;
-}
 </style>
 </head>
 
@@ -464,14 +553,20 @@ text-decoration:underline;transform:translateY(-2px);
     <span>Back</span>
   </button>
 
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="Products.html">Products</a>
+    <a href="Contact.html">Contact</a>
+  </nav>
+
   <p id="creator">Meet the creator</p>
 
-  <!-- Replace with creator's image -->
-  <img src="Eden.png" id="eden" alt="Image not found">
+  <!-- Photo of Eden Nigussie, the maker behind Qacha Craft. Replace the alt text below if a different photo is used. -->
+  <img src="Eden.png" id="eden" alt="Portrait of Eden Nigussie, founder of Qacha Craft">
 
 <p id="edu">Eden Nigusse</p>
   <!-- ABOUT CREATOR -->
-<a href="Qacha_Crafts Portfolio.pdf" id="pdf">Check Portflio</a>
+<a href="Qacha_Crafts Portfolio.pdf" id="pdf">Check Portfolio</a>
   <div id="about-creator" class="section">
 
     <p>
@@ -483,7 +578,10 @@ text-decoration:underline;transform:translateY(-2px);
       and meaningful design.
     </p>
 
-    <img src="Craft1.png" alt="Image not found">
+    <!-- NOTE: alt text below is a best guess based on the surrounding copy.
+         Replace each one with a short, accurate description of what is
+         actually pictured (e.g. "Woven jute wall hanging in a living room"). -->
+    <img src="Craft1.png" alt="Handmade jute and canvas decor piece by Qacha Craft">
 
   </div>
 
@@ -492,7 +590,7 @@ text-decoration:underline;transform:translateY(-2px);
 
   <div id="story" class="section">
 
-    <img src="Craft2.png" alt="Image not found">
+    <img src="Craft2.png" alt="Handmade Qacha Craft piece combining jute rope and canvas">
 
     <p>
       At Qacha_Crafts, simple materials are transformed into artistic and
@@ -513,10 +611,10 @@ text-decoration:underline;transform:translateY(-2px);
 
     <div class="imgs">
 
-      <!-- Just change the src names -->
-      <img src="Craft3.png" alt="Image not found">
-      <img src="Craft4.png" alt="Image not found">
-      <img src="Craft5.png" alt="Image not found">
+      <!-- Replace each alt with a short description of that specific piece -->
+      <img src="Craft3.png" alt="Qacha Craft handmade piece, example 1">
+      <img src="Craft4.png" alt="Qacha Craft handmade piece, example 2">
+      <img src="Craft5.png" alt="Qacha Craft handmade piece, example 3">
 
     </div>
 
@@ -531,10 +629,10 @@ text-decoration:underline;transform:translateY(-2px);
 
     <div class="imgs">
 
-      <!-- Just change the src names -->
-      <img src="Process1.png" alt="Image not found">
-      <img src="Process2.png" alt="Image not found">
-      <img src="Process3.png" alt="Image not found">
+      <!-- Replace each alt with what is actually happening in that photo -->
+      <img src="Process1.png" alt="Step in the Qacha Craft creative process, part 1">
+      <img src="Process2.png" alt="Step in the Qacha Craft creative process, part 2">
+      <img src="Process3.png" alt="Step in the Qacha Craft creative process, part 3">
 
     </div>
 
@@ -545,7 +643,7 @@ text-decoration:underline;transform:translateY(-2px);
 
   <div class="section" id="contacts">
 
-    <img src="Social.png" alt="Image not found">
+    <img src="Social.png" alt="Qacha Craft contact and social media">
 
     <p>
       Have an idea for a unique handmade piece?
@@ -557,23 +655,34 @@ text-decoration:underline;transform:translateY(-2px);
 
   </div>
     <div id="Socials">
-    <i class="fa-brands fa-instagram" id="insta"></i>
-    <i class="fa-brands fa-tiktok" id="tik"></i>
-    <i class="fa-brands fa-telegram" id="tele"></i>
+    <a href="https://www.instagram.com/qacha_crafts/" id="insta" target="_blank" rel="noopener noreferrer" aria-label="Qacha Craft on Instagram">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+    </a>
+    <a href="https://www.tiktok.com/@qacha_crafts" id="tik" target="_blank" rel="noopener noreferrer" aria-label="Qacha Craft on TikTok">
+      <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+    </a>
+    <!--
+      FIXED: the previous link (web.telegram.org/a/#-100...) is a private Telegram Web
+      session URL tied to one logged-in account. It only works for whoever is signed
+      into that exact browser session, so it would fail for almost every visitor.
+      This now points to the same public Telegram username used on the Products page.
+      If Qacha Craft's Telegram is actually a channel rather than this personal handle,
+      replace the href below with that channel's public t.me/... or t.me/+... link.
+    -->
+    <a href="https://t.me/Edennigussie" id="tele" target="_blank" rel="noopener noreferrer" aria-label="Qacha Craft on Telegram">
+      <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+    </a>
     </div>
 <script>
-    document.getElementById("backBtn").addEventListener("click", function(){
-        history.back();
-    })
-    document.getElementById("insta").addEventListener("click", function(){
-        window.location.href = "https://www.instagram.com/qacha_crafts/";
-    })
-    document.getElementById("tele").addEventListener("click", function(){
-        window.location.href = "https://web.telegram.org/a/#-1003861606655";
-    })
-    document.getElementById("tik").addEventListener("click", function(){
-        window.location.href = "https://www.tiktok.com/@qacha_crafts";
-    })
+  document.getElementById("backBtn").addEventListener("click", function(){
+    // If this page was opened directly (e.g. from a shared link) there is no
+    // earlier page in history to go back to, so fall back to the home page.
+    if(history.length > 1){
+      history.back();
+    }else{
+      window.location.href = "index.html";
+    }
+  });
 </script>
 </body>
 </html>
