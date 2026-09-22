@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Contact Us</title>
+  <title>Contact — Qacha Craft</title>
+  <meta name="description" content="Get in touch with Qacha Craft for support, general questions, or business and partnership inquiries.">
 
   <style>
 
@@ -97,7 +98,9 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 55px;
+      gap: 45px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .nav-links a {
@@ -114,7 +117,8 @@
         transform 0.3s ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
       color: #f0c98f;
 
       transform: translateY(-2px);
@@ -330,6 +334,17 @@
       text-align: center;
     }
 
+    /* Placeholder contact details: styled so they visibly read as
+       "not filled in yet" rather than looking like real info. */
+    .info-item.placeholder {
+      color: #c9a488;
+      font-style: italic;
+    }
+
+    .info-item.placeholder span {
+      color: #c9a488;
+    }
+
 
     /* =========================
        RESPONSIVE
@@ -379,7 +394,7 @@
       }
 
       .nav-links {
-        gap: 25px;
+        gap: 20px;
       }
 
       .nav-links a {
@@ -420,8 +435,9 @@
     <div class="nav-links">
 
       <a href="index.html">Home</a>
-
-      <a href="#" class="active">Contact</a>
+      <a href="Products.html">Products</a>
+      <a href="About us.html">About</a>
+      <a href="#" class="active" aria-current="page">Contact</a>
 
     </div>
 
@@ -445,8 +461,13 @@
 
 
 
-    <!-- Contact sections -->
-
+    <!--
+      CONTACT INFO IS PLACEHOLDER TEXT — replace every "Add email" /
+      "Add phone number" below with the real details before launch.
+      The old version had fake @monkeytype.com addresses and made-up
+      phone numbers; these placeholders are written so they can't be
+      mistaken for real ones and clicked/dialed by mistake.
+    -->
     <div class="contacts">
 
 
@@ -470,14 +491,14 @@
 
         <div class="info">
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>✉</span>
-            support@monkeytype.com
+            Add email
           </div>
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>⌕</span>
-            +251 911 123 456
+            Add phone number
           </div>
 
           <div class="info-item">
@@ -511,14 +532,14 @@
 
         <div class="info">
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>✉</span>
-            hello@monkeytype.com
+            Add email
           </div>
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>⌕</span>
-            +251 911 987 654
+            Add phone number
           </div>
 
           <div class="info-item">
@@ -552,14 +573,14 @@
 
         <div class="info">
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>✉</span>
-            partnerships@monkeytype.com
+            Add email
           </div>
 
-          <div class="info-item">
+          <div class="info-item placeholder">
             <span>⌕</span>
-            +251 912 345 678
+            Add phone number
           </div>
 
           <div class="info-item">
