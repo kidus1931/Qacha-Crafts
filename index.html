@@ -3,12 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qacha Crafts</title>
+
+  <title>Qacha Craft — Handmade Crafts & Home Décor</title>
+  <meta name="description" content="Qacha Craft creates handmade jute, canvas, and home décor pieces in Sheger. Browse the collection and order directly on Telegram.">
+
+  <!-- Favicon (built-in, no extra file needed) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d1b11'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23ead0aa'%3EQ%3C/text%3E%3C/svg%3E">
+
+  <link rel="canonical" href="https://kidus1931.github.io/Qacha-Crafts/">
+
+  <!-- Link previews (Telegram, WhatsApp, Facebook, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Qacha Craft">
+  <meta property="og:title" content="Qacha Craft — Handmade Crafts & Home Décor">
+  <meta property="og:description" content="Qacha Craft creates handmade jute, canvas, and home décor pieces in Sheger. Browse the collection and order directly on Telegram.">
+  <meta property="og:url" content="https://kidus1931.github.io/Qacha-Crafts/">
+  <!--
+    Using the existing hero photo as the share image for now, since it's already
+    on the page. For the best-looking link preview, replace it later with a
+    version cropped to 1200x630px.
+  -->
+  <meta property="og:image" content="https://kidus1931.github.io/Qacha-Crafts/IMG_20260918_210239_114.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Qacha Craft — Handmade Crafts & Home Décor">
+  <meta name="twitter:description" content="Qacha Craft creates handmade jute, canvas, and home décor pieces in Sheger. Browse the collection and order directly on Telegram.">
+  <meta name="twitter:image" content="https://kidus1931.github.io/Qacha-Crafts/IMG_20260918_210239_114.jpg">
+
+  <!-- Starts downloading the hero photo as early as possible, since it's the
+       first thing visitors see (improves load performance / Core Web Vitals). -->
+  <link rel="preload" as="image" href="IMG_20260918_210239_114.jpg" fetchpriority="high">
+
+  <!-- Google Fonts: just the one weight used for the brand wordmark -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
+
+  <!-- Lets search engines show Qacha Craft as a known brand/organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Qacha Craft",
+    "url": "https://kidus1931.github.io/Qacha-Crafts/",
+    "description": "Handmade jute, canvas, and home décor pieces from Qacha Craft.",
+    "sameAs": [
+      "https://www.instagram.com/qacha_crafts/",
+      "https://www.tiktok.com/@qacha_crafts",
+      "https://t.me/Edennigussie"
+    ]
+  }
+  </script>
 
   <style>
     html{
       -webkit-text-size-adjust:100%;
       text-size-adjust:100%;
+      background:#2d1b11;
     }
 
     *{
@@ -27,6 +77,7 @@
           rgba(45, 27, 17, 0.28) 100%
         ),
         url('IMG_20260918_210239_114.jpg') no-repeat center center / cover;
+      background-color:#2d1b11; /* shows while the photo loads, or if it fails */
 
       display:flex;
       flex-direction:column;
@@ -46,8 +97,9 @@
     ------------------------- */
 
     .text1{
-      font-family:cursive, arial, Helvetica, sans-serif;
-      font-size:3rem;
+      font-family:'Caveat', cursive, Arial, Helvetica, sans-serif;
+      font-weight:700;
+      font-size:3.4rem;
       margin-top:5vh;
       margin-left:5vw;
 
@@ -78,6 +130,7 @@
 
     .text2{
       font-size:4rem;
+      font-weight:normal;
       font-family:Georgia, 'Times New Roman', serif;
 
       line-height:1.05;
@@ -113,6 +166,8 @@
     ------------------------- */
 
     .explore{
+      display:inline-block;
+
       margin-top:3vh;
 
       padding:1.2rem 2.2rem;
@@ -128,6 +183,7 @@
       font-weight:bold;
 
       cursor:pointer;
+      text-decoration:none;
 
       box-shadow:
         0 8px 25px rgba(0,0,0,0.25);
@@ -172,7 +228,6 @@
     }
 
 
-    nav button,
     nav a{
       min-width:9rem;
 
@@ -204,7 +259,6 @@
     }
 
 
-    nav button:hover,
     nav a:hover{
       background:#b88752;
 
@@ -214,9 +268,19 @@
     }
 
 
-    nav button:active,
     nav a:active{
       transform:translateY(0);
+    }
+
+
+    /* -------------------------
+       KEYBOARD FOCUS
+    ------------------------- */
+
+    .explore:focus-visible,
+    nav a:focus-visible{
+      outline:3px solid #ead0aa;
+      outline-offset:3px;
     }
 
 
@@ -257,7 +321,7 @@
     @media (max-width:900px){
 
       .text1{
-        font-size:2.6rem;
+        font-size:2.8rem;
       }
 
       .main-text{
@@ -294,10 +358,11 @@
             rgba(45, 27, 17, 0.9) 100%
           ),
           url('IMG_20260918_210239_114.jpg') no-repeat center center / cover;
+        background-color:#2d1b11;
       }
 
       .text1{
-        font-size:2.2rem;
+        font-size:2.4rem;
         margin-top:4vh;
         margin-left:1.5rem;
       }
@@ -330,9 +395,8 @@
         padding:1rem 1rem 1.8rem;
       }
 
-      /* three equal-width buttons in one row */
-      nav button,nav a
-      {
+      /* three equal-width links in one row */
+      nav a{
         flex:1 1 0;
         min-width:0;
 
@@ -350,7 +414,7 @@
     @media (max-width:360px){
 
       .text1{
-        font-size:2rem;
+        font-size:2.2rem;
       }
 
       .main-text{
@@ -370,7 +434,6 @@
         padding:1rem 0.8rem 1.5rem;
       }
 
-      nav button,
       nav a{
         font-size:0.85rem;
       }
@@ -381,38 +444,32 @@
 
 <body>
 
-  <p class="text1">Qacha crafts</p>
+  <header>
+    <p class="text1">Qacha crafts</p>
+  </header>
 
-  <div class="main-text">
+  <main>
+    <div class="main-text">
 
-    <p class="text2">
-      Qacha crafts, The best craft in all of Sheger
-    </p>
+      <h1 class="text2">
+        Qacha crafts, The best craft in all of Sheger
+      </h1>
 
-    <p class="text3">
-      we make the best crafts using qacha and we also make different artistic images and different artistic home decors to transform your house
-    </p>
+      <p class="text3">
+        we make the best crafts using qacha and we also make different artistic images and different artistic home decors to transform your house
+      </p>
 
-    <button class="explore" id="Explore">
-      Explore crafts
-    </button>
+      <a class="explore" id="Explore" href="Products.html">
+        Explore crafts
+      </a>
 
-  </div>
+    </div>
+  </main>
 
-  <nav>
-    <button class="contact" id="Contact">contact</button>
-    <button  id="About">About us</button>
+  <nav aria-label="Site">
+    <a class="contact" id="Contact" href="Contact.html">Contact</a>
+    <a id="About" href="About us.html">About us</a>
   </nav>
-<script>
-  document.getElementById("Explore").addEventListener("click", function(){
-    window.location.href = "Products.html";
-  })
-    document.getElementById("Contact").addEventListener("click", function(){
-    window.location.href = "Contact.html";
-    })
- document.getElementById("About").addEventListener("click", function(){
-   window.location.href = "About us.html";
- })
-</script>
+
 </body>
 </html>
