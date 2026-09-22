@@ -46,11 +46,13 @@
 <meta property="og:site_name" content="Qacha Craft">
 <meta property="og:title" content="Qacha Craft — Art Collection">
 <meta property="og:description" content="A curated collection of distinctive artworks and handcrafted pieces.">
+<meta property="og:url" content="https://kidus1931.github.io/Qacha-Crafts/Products.html">
 <!--
-  ADD THESE ONCE YOU HAVE A DOMAIN AND A SHARE IMAGE (1200x630, full https:// addresses only):
-  <meta property="og:url" content="https://YOUR-DOMAIN/shop.html">
-  <meta property="og:image" content="https://YOUR-DOMAIN/share.jpg">
-  <link rel="canonical" href="https://YOUR-DOMAIN/shop.html">
+  STILL NEEDED: a real share image. Once you have one (1200x630px, JPG or PNG,
+  uploaded to the repo), uncomment the line below and point it at that file:
+  <meta property="og:image" content="https://kidus1931.github.io/Qacha-Crafts/share.jpg">
+  Without this, links shared in Telegram/WhatsApp will show the title and
+  description but no preview picture.
 -->
 
 <style>
@@ -207,7 +209,11 @@ button{font-family:inherit;cursor:pointer;}
 .order-btn:active{transform:scale(.98);}
 .order-btn svg{width:16px;height:16px;fill:currentColor;flex:none;}
 
-footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px solid rgba(44,26,17,.08);text-align:center;}
+footer{padding:32px var(--gutter) 40px;border-top:1px solid rgba(44,26,17,.08);text-align:center;}
+.footer-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-bottom:14px;}
+.footer-nav a{font-size:.85rem;font-weight:600;color:var(--brown-text);transition:color 180ms ease;}
+.footer-nav a:hover,.footer-nav a:focus-visible{color:var(--brown-dark);}
+.footer-copy{font-size:.85rem;color:#6F604A;}
 
 /* Three columns is the widest layout on purpose: 6 products = two full rows of 3.
    If you grow to 8 or 12 products, you can add a 4-column rule for very wide screens. */
@@ -220,6 +226,7 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
   .tg-top-btn{padding:9px 13px;font-size:.78rem;}
   .hero-banner{margin-top:18px;}
   .grid{grid-template-columns:1fr;gap:20px;}
+  .footer-nav{gap:14px;}
 }
 @media (hover:none){
   .card:hover{transform:none;box-shadow:none;}
@@ -283,7 +290,14 @@ footer{padding:40px var(--gutter);font-size:.85rem;color:#6F604A;border-top:1px 
     <div class="grid" id="productGrid"></div>
   </main>
 
-  <footer>&copy; 2026 Qacha Craft. All rights reserved. Website developed by H.K. A curated collection of distinctive art and handcrafted pieces.</footer>
+  <footer>
+    <nav class="footer-nav" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="About us.html">About</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Qacha Craft. All rights reserved. Website developed by H.K. A curated collection of distinctive art and handcrafted pieces.</p>
+  </footer>
 </div>
 
 
