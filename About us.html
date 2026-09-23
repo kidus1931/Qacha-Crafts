@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Qacha Craft</title>
-  <meta name="description" content="Meet Eden Nigussie, the maker behind Qacha Craft, and see the handmade jute, canvas, and decor pieces in her collection.">
+  <meta name="description" content="Meet Eden Nigussie and Abel, the makers behind Qacha Craft, and see the handmade jute, canvas, and decor pieces in their collection.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
 *{
@@ -165,7 +165,18 @@ body{
    CREATOR IMAGE
 ========================= */
 
-#eden{
+.creators{
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:150px;
+  flex-wrap:wrap;
+}
+
+.creators img{
   width:190px;
   height:190px;
   object-fit:cover;
@@ -263,7 +274,8 @@ body{
 ========================= */
 
 #creative-work,
-#creative-process{
+#creative-process,
+#creative-videos{
   width:min(1000px,90vw);
 
   display:flex;
@@ -274,7 +286,8 @@ body{
 }
 
 #creative-work > p,
-#creative-process > p{
+#creative-process > p,
+#creative-videos > p{
   position:relative;
 
   font-size:clamp(2rem,4vw,3rem);
@@ -286,7 +299,8 @@ body{
 }
 
 #creative-work > p::after,
-#creative-process > p::after{
+#creative-process > p::after,
+#creative-videos > p::after{
   content:"";
   display:block;
 
@@ -330,7 +344,8 @@ body{
   to your actual image name.
 */
 
-.imgs img{
+.imgs img,
+.imgs iframe{
   width:clamp(150px,23vw,220px);
   aspect-ratio:1 / 1;
   height:auto;
@@ -350,7 +365,12 @@ body{
     filter .3s ease;
 }
 
-.imgs img:hover{
+.imgs iframe{
+  aspect-ratio:16 / 9;
+}
+
+.imgs img:hover,
+.imgs iframe:hover{
   transform:translateY(-8px) scale(1.02);
 
   box-shadow:
@@ -458,7 +478,11 @@ body{
     font-size:.78rem;
   }
 
-  #eden{
+  .creators{
+    gap:70px;
+  }
+
+  .creators img{
     width:155px;
     height:155px;
   }
@@ -486,7 +510,8 @@ body{
     gap:20px;
   }
 
-  .imgs img{
+  .imgs img,
+  .imgs iframe{
     width:min(40vw,180px);
   }
 
@@ -529,7 +554,17 @@ body{
     font-size:2.2rem;
   }
 
-  .imgs img{
+  .creators{
+    gap:50px;
+  }
+
+  .creators img{
+    width:130px;
+    height:130px;
+  }
+
+  .imgs img,
+  .imgs iframe{
     width:130px;
   }
 
@@ -562,7 +597,12 @@ body{
   <p id="creator">Meet the creator</p>
 
   <!-- Photo of Eden Nigussie, the maker behind Qacha Craft. Replace the alt text below if a different photo is used. -->
-  <img src="Eden.png" id="eden" alt="Portrait of Eden Nigussie, founder of Qacha Craft">
+  <div class="creators">
+    <img src="Eden.png" id="eden" alt="Portrait of Eden Nigussie, founder of Qacha Craft">
+
+    <!-- Second creator: replace Creator2.png and the alt text with the real photo and name. -->
+    <img src="Creator2.png" id="creator2" alt="Portrait of Abel, founder of Qacha Craft">
+  </div>
 
 <p id="edu">Eden Nigusse</p>
   <!-- ABOUT CREATOR -->
@@ -633,6 +673,26 @@ body{
       <img src="Process1.png" alt="Step in the Qacha Craft creative process, part 1">
       <img src="Process2.png" alt="Step in the Qacha Craft creative process, part 2">
       <img src="Process3.png" alt="Step in the Qacha Craft creative process, part 3">
+
+    </div>
+
+  </div>
+
+
+  <!-- CREATIVE VIDEOS -->
+
+  <div id="creative-videos">
+
+    <p>Our craft in action</p>
+
+    <div class="imgs">
+
+      <!-- PLACEHOLDER LINKS: replace VIDEO_ID_1/2/3 with the ID of each YouTube video.
+           For https://www.youtube.com/watch?v=abc123XYZ the ID is abc123XYZ,
+           so the src becomes https://www.youtube.com/embed/abc123XYZ -->
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Qacha Craft video 1" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Qacha Craft video 2" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Qacha Craft video 3" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
     </div>
 
