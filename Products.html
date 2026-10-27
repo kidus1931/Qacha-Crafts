@@ -296,7 +296,7 @@ footer{padding:32px var(--gutter) 40px;border-top:1px solid rgba(44,26,17,.08);t
       <a href="About us.html">About</a>
       <a href="Contact.html">Contact</a>
     </nav>
-    <p class="footer-copy">&copy; 2026 Qacha Craft. All rights reserved. Website developed by H.K. A curated collection of distinctive art and handcrafted pieces.</p>
+    <p class="footer-copy">&copy; 2026 Qacha Craft. All rights reserved. Website developed by <span id="novix">NOVIX web dev</span>. A curated collection of distinctive art and handcrafted pieces.</p>
   </footer>
 </div>
 
@@ -625,6 +625,10 @@ footer{padding:32px var(--gutter) 40px;border-top:1px solid rgba(44,26,17,.08);t
 
   fontsReady().then(playIntro);
 })();
+  document.getElementById("novix").addEventListener("click", function(){
+    window.location.href = "https://t.me/Novix_web_dev"
+  })
+    
 </script>
 </body>
 </html>
