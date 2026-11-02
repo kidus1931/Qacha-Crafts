@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact — Qacha Craft</title>
+  <meta name="description" content="Contact Qacha Craft to place an order, ask a question, or talk about business and partnership opportunities.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d1b11'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23ead0aa'%3EQ%3C/text%3E%3C/svg%3E">
+
+  <link rel="canonical" href="https://qacha-crafts.com.et/Contact.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Qacha Craft">
+  <meta property="og:title" content="Contact — Qacha Craft">
+  <meta property="og:description" content="Contact Qacha Craft to place an order, ask a question, or talk about business and partnership opportunities.">
+  <meta property="og:url" content="https://qacha-crafts.com.et/Contact.html">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 75% 45%, #392317 0%, transparent 35%),
+        linear-gradient(135deg, #2d1b11, #1f1009);
+
+      color: #fff5e7;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      
+
+      position: relative;
+    }
+
+
+    /* =========================
+       BACKGROUND SHAPES
+    ========================= */
+
+    body::before {
+      content: "";
+      position: absolute;
+
+      width: 500px;
+      height: 180px;
+
+      bottom: -100px;
+      left: -100px;
+
+      background: #4b301f;
+
+      border-radius: 50% 50% 0 0;
+
+      transform: rotate(25deg);
+
+      opacity: 0.8;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+
+      width: 550px;
+      height: 180px;
+
+      bottom: -110px;
+      right: -130px;
+
+      background: #4b301f;
+
+      border-radius: 50% 50% 0 0;
+
+      transform: rotate(-25deg);
+
+      opacity: 0.8;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding-top: 32px;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: #f4dfc3;
+
+      text-decoration: none;
+
+      font-size: 16px;
+
+      padding: 8px 0;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #f0c98f;
+
+      transform: translateY(-2px);
+    }
+
+    .nav-links .active {
+      color: #f0c98f;
+
+      border-bottom: 2px solid #b88752;
+    }
+
+
+    /* =========================
+       MAIN CONTENT
+    ========================= */
+
+    main {
+      width: 100%;
+      max-width: 1250px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      position: relative;
+      z-index: 1;
+    }
+
+
+    /* =========================
+       MAIN TEXT
+    ========================= */
+
+    .Main-text {
+      margin-top: 115px;
+
+      font-size: 4.2rem;
+      font-weight: 600;
+
+      text-align: center;
+
+      letter-spacing: -2px;
+
+      color: #fff5e7;
+    }
+
+    .subtitle {
+      max-width: 570px;
+
+      margin-top: 22px;
+
+      text-align: center;
+
+      font-size: 18px;
+      line-height: 1.7;
+
+      color: #ead0aa;
+    }
+
+
+    /* =========================
+       CONTACT BOXES
+    ========================= */
+
+    .contacts {
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+
+      gap: 0;
+
+      margin-top: 42px;
+    }
+
+    .box {
+      width: 31%;
+
+      min-height: 425px;
+
+      padding: 32px 38px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(75, 48, 31, 0.55),
+          rgba(57, 35, 23, 0.35)
+        );
+
+      border: 1px solid rgba(184, 135, 82, 0.28);
+
+      border-radius: 12px;
+
+      position: relative;
+
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .box + .box {
+      margin-left: 30px;
+    }
+
+    .box:hover {
+      transform: translateY(-8px);
+
+      border-color: #b88752;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(75, 48, 31, 0.75),
+          rgba(57, 35, 23, 0.55)
+        );
+
+      box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(184, 135, 82, 0.08);
+    }
+
+
+    /* =========================
+       ICON
+    ========================= */
+
+    .icon {
+      width: 64px;
+      height: 64px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 25px;
+
+      border-radius: 50%;
+
+      background: #4b301f;
+
+      color: #f4dfc3;
+
+      font-size: 27px;
+
+      border: 1px solid rgba(184, 135, 82, 0.25);
+
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .box:hover .icon {
+      background: #b88752;
+
+      transform: scale(1.08);
+    }
+
+
+    /* =========================
+       BOX HEADINGS
+    ========================= */
+
+    .box h2 {
+      font-size: 25px;
+
+      margin-bottom: 18px;
+
+      color: #fff5e7;
+    }
+
+    .box p {
+      color: #ead0aa;
+
+      font-size: 16px;
+
+      line-height: 1.65;
+
+      margin-bottom: 28px;
+    }
+
+
+    /* =========================
+       CONTACT INFORMATION
+    ========================= */
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      gap: 17px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+
+      gap: 17px;
+
+      color: #f4dfc3;
+
+      font-size: 16px;
+    }
+
+    .info-item span {
+      width: 22px;
+
+      color: #f0c98f;
+
+      font-size: 19px;
+
+      text-align: center;
+    }
+
+    .info-item a {
+      color: #fff5e7;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240, 201, 143, 0.4);
+      overflow-wrap: anywhere;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .info-item a:hover,
+    .info-item a:focus-visible {
+      color: #f0c98f;
+      border-bottom-color: #f0c98f;
+    }
+
+    .info-item a:focus-visible,
+    .nav-links a:focus-visible {
+      outline: 2px solid #f0c98f;
+      outline-offset: 4px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      body {
+        overflow-y: auto;
+      }
+
+      .Main-text {
+        margin-top: 80px;
+
+        font-size: 3rem;
+      }
+
+      .contacts {
+        flex-direction: column;
+
+        align-items: center;
+
+        padding: 0 25px;
+
+        padding-bottom: 50px;
+      }
+
+      .box {
+        width: 100%;
+
+        max-width: 500px;
+      }
+
+      .box + .box {
+        margin-left: 0;
+
+        margin-top: 20px;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      nav {
+        padding-top: 25px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+      }
+
+      .Main-text {
+        font-size: 2.5rem;
+
+        letter-spacing: -1px;
+
+        padding: 0 20px;
+      }
+
+      .subtitle {
+        padding: 0 25px;
+
+        font-size: 15px;
+      }
+
+      .box {
+        padding: 28px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- Navigation -->
+
+  <nav>
+
+    <div class="nav-links">
+
+      <a href="index.html">Home</a>
+      <a href="Products.html">Products</a>
+      <a href="About us.html">About</a>
+      <a href="#" class="active" aria-current="page">Contact</a>
+
+    </div>
+
+  </nav>
+
+
+
+  <main>
+
+
+    <!-- Main heading -->
+
+    <h1 class="Main-text">
+      Get in touch with us
+    </h1>
+
+    <p class="subtitle">
+      We'd love to hear from you. Whether you have a question,
+      a project in mind, or just want to say hello — we're here.
+    </p>
+
+    <div class="contacts">
+
+
+      <!-- Box 1 -->
+
+      <div class="box">
+
+        <div class="icon" aria-hidden="true">
+          ♧
+        </div>
+
+        <h2>
+          Order placement 
+        </h2>
+
+        <p>
+          If you have an interest in our products. Contact us through the phone number and emails listed in this page.
+          If you want to order a product without directly contacting us, place an order in our product page.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span aria-hidden="true">✉</span>
+            <a href="mailto:nigussieeden@gmail.com">nigussieeden@gmail.com</a>
+          </div>
+
+          <div class="info-item">
+            <span aria-hidden="true">⌕</span>
+            <a href="tel:+251942137455" class="phonenumber">0942137455</a>
+          </div>
+
+          
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Box 2 -->
+
+      <div class="box">
+
+        <div class="icon" aria-hidden="true">
+          ✉
+        </div>
+
+        <h2>
+          General questions 
+        </h2>
+
+        <p>
+          Have a question, suggestion, or just want
+          to learn more about us? We'd love to
+          hear from you.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span aria-hidden="true">✉</span>
+            <a href="mailto:getanehgebretsadik@gmail.com">getanehgebretsadik@gmail.com</a>
+          </div>
+
+          <div class="info-item">
+            <span aria-hidden="true">⌕</span>
+            <a href="tel:+251973070678" class="phonenumber">0973070678</a>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Box 3 -->
+
+      <div class="box">
+
+        <div class="icon" aria-hidden="true">
+          ♢
+        </div>
+
+        <h2>
+          Business / Partnerships
+        </h2>
+
+        <p>
+          Interested in working together?
+          We're always open to new opportunities
+          and collaborations.
+        </p>
+
+        <div class="info">
+
+          <div class="info-item">
+            <span aria-hidden="true">@</span>
+            <a href="https://t.me/Edennigussie" target="_blank" rel="noopener noreferrer">@Edennigussie<span class="sr-only"> on Telegram (opens in a new tab)</span></a>
+          </div>
+
+          <div class="info-item">
+            <span aria-hidden="true">@</span>
+            <a href="https://t.me/abeelion" target="_blank" rel="noopener noreferrer">@abeelion<span class="sr-only"> on Telegram (opens in a new tab)</span></a>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+</body>
+</html>
