@@ -353,7 +353,7 @@ body{
 
 .imgs img,
 .imgs iframe{
-  width:clamp(150px,23vw,220px);
+  width:clamp(260px,28vw,300px);
   aspect-ratio:1 / 1;
   height:auto;
 
@@ -375,18 +375,6 @@ body{
 .imgs iframe{
   aspect-ratio:16 / 9;
 }
-
-.imgs img:hover,
-.imgs iframe:hover{
-  transform:translateY(-8px) scale(1.02);
-
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.45);
-
-  filter:brightness(1.08);
-}
-
-
 /* =========================
    CONTACT SECTION
 ========================= */
@@ -530,10 +518,8 @@ body{
     gap:20px;
   }
 
-  .imgs img,
-  .imgs iframe{
-    width:min(40vw,180px);
-  }
+.imgs img{ width:min(40vw,180px); }
+.imgs iframe{ width:min(88vw,480px);}
 
   #pdf{
     font-size:15px;
@@ -583,10 +569,8 @@ body{
     height:130px;
   }
 
-  .imgs img,
-  .imgs iframe{
-    width:130px;
-  }
+.imgs img{ width:130px; }
+.imgs iframe{ width:88vw; }
 
   .section img{
     width:78vw;
